@@ -1,6 +1,6 @@
 (() => {
-    const selector = selector => /* trecho omitido */
-    const create = element => /* trecho omitido */
+    const selector = selector => document.querySelector(selector);
+    const create = element => document.createElement(element);
 
     const app = selector('#app');
 
@@ -11,11 +11,17 @@
     Logo.src = './assets/images/logo.svg';
     Logo.classList.add('logo');
 
+    const FormLogin = create('div');
+    FormLogin.classList.add('formLogin');
+
     const Form = create('form');
+    Form.classList.add('form');
+
+
 
     Form.onsubmit = async e => {
         e.preventDefault();
-        const [email, password] = /* trecho omitido */
+        const [email, password] = "/* trecho omitido */"
 
         const {url} = await fakeAuthenticate(email.value, password.value);
 
@@ -31,14 +37,18 @@
             ? button.setAttribute('disabled','disabled')
             : button.removeAttribute('disabled');
     };
+    
+    Form.innerHTML = `
+        <input type="text" class="email" placeholder="Entre com seu e-mail" >
+        <input type="password" class="password" placeholder="Digite sua senha supersecreta">
+        <button class="entrar">Entrar</button>
+    `
 
-    Form.innerHTML = /**
-    * bloco de código omitido
-    * monte o seu formulário
-    */
-
-    app.appendChild(Logo);
-    Login.appendChild(Form);
+    // app.appendChild(Logo);
+    Login.appendChild(Logo);
+    Login.appendChild(FormLogin);
+    FormLogin.appendChild(Form);
+    
 
     async function fakeAuthenticate(email, password) {
 
@@ -63,7 +73,7 @@
 
     function renderPageUsers(users) {
         app.classList.add('logged');
-        Login.style.display = /* trecho omitido */
+        Login.style.display = 'inline-block'
 
         const Ul = create('ul');
         Ul.classList.add('container')
@@ -78,7 +88,7 @@
 
     // init
     (async function(){
-        const rawToken = /* trecho omitido */
+        const rawToken = false;
         const token = rawToken ? rawToken.split('.') : null
         if (!token || token[2] < (new Date()).getTime()) {
             localStorage.removeItem('token');
