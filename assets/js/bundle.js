@@ -55,11 +55,14 @@
         const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;
         
         localStorage.setItem('token', fakeJwtToken);
+        localStorage.setItem('userList', data.url);
 
         return data;
     }
 
     async function getDevelopersList(url) {
+        const response = await fetch(url);
+        const data = await response.json();
         /**
          * bloco de código omitido
          * aqui esperamos que você faça a segunda requisição 
