@@ -10,6 +10,9 @@
 }
 html, body, #app {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 body, input, button {
     font: 14px 'Roboto', sans-serif;
@@ -30,6 +33,127 @@ body {
     background-attachment: fixed;
 }
 
-/**
-* YOUR CODE HERE
-*/
+.logo{
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    flex-direction: column;
+}
+.form{
+    flex-direction: column;
+}
+.login{
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 150px;
+}
+.loading{
+    background-image:url("../images/Spinner-1s-200px.svg");
+    background-position: center;
+    background-color: #ffffff96;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+.formLogin{
+    border-radius: 20px 0px 20px 0px;
+    -moz-border-radius: 20px 0px 20px 0px;
+    -webkit-border-radius: 20px 0px 20px 0px;
+    border: 0px none #000000;
+    background-color: #e4e4e4;
+    width: 350px;
+    padding:15px;
+    
+}
+.email, .password {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #d4d4d4;
+    padding:10px;
+    border: none;
+
+}
+.entrar {
+    width: 100%;    
+    background-color: #008429;
+    padding:10px;
+    border: none;
+    color: #fff;
+}
+
+.entrar:disabled {
+    background-color: #d1d1d1;
+}
+
+ul.container{
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 50px;
+}
+
+.users{
+    flex-direction: column;
+    text-align: center;
+}
+
+.userContainer {
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px none #000000;
+    padding:5px;
+    margin:5px;
+    background-color: #ffffff;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex: 1 1 auto;
+    -webkit-box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
+}
+
+.avatar{
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 0px none #000000;
+    width: 35px; 
+    height: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.avatar .upAvatar {
+    position: absolute;
+    display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    top: -15px;
+    left: -15px;
+  }
+
+.userContainer:hover .avatar .upAvatar {
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+}
+
+.divText{
+    color:#938888;
+    margin-left:5px;
+    font-weight: bold;
+}
