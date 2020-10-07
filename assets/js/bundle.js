@@ -1,15 +1,21 @@
 (() => {
+    const sessionTime = 10000; //300000
     const selector = selector => document.querySelector(selector);
     const create = element => document.createElement(element);
+    const remove = element => element.remove();
 
     const app = selector('#app');
 
     const Login = create('div');
+    const Users = create('div');
     Login.classList.add('login');
+    Users.classList.add('users');
 
     const Logo = create('img');
     Logo.src = './assets/images/logo.svg';
     Logo.classList.add('logo');
+
+
 
     const FormLogin = create('div');
     FormLogin.classList.add('formLogin');
@@ -25,6 +31,7 @@
 
         location.href='#users';
         
+        remove(FormLogin);
         const users = await getDevelopersList(url);
         renderPageUsers(users);
     };
@@ -43,6 +50,7 @@
     `
     
     Login.appendChild(Logo);
+    
     Login.appendChild(FormLogin);
     FormLogin.appendChild(Form);
 
@@ -52,7 +60,7 @@
         const response = await fetch(`http://www.mocky.io/v2/5dba690e3000008c00028eb6`);
         const data = await response.json();
 
-        const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;
+        const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+sessionTime}`;
         
         localStorage.setItem('token', fakeJwtToken);
         localStorage.setItem('userList', data.url);
@@ -96,6 +104,8 @@
         } else {
             location.href='#users';
             const users = await getDevelopersList(atob(token[1]));
+            app.appendChild(Users);
+            Users.appendChild(Logo);
             renderPageUsers(users);
         }
     })()
