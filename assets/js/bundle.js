@@ -5,6 +5,7 @@
     const remove = element => element.remove();
     const elementContent = content => document.createTextNode(content)
     const app = selector('#app');
+    const body = selector('body');
     const Login = create('div');
     Login.classList.add('login');
     const Users = create('div');    
@@ -18,6 +19,7 @@
     Form.classList.add('form');
 
     Form.onsubmit = async e => {
+        loading(true);
         e.preventDefault();
         const [data] = e.target.parentElement.children;
         const {url} = await fakeAuthenticate(email.value, password.value);
@@ -27,6 +29,7 @@
         Users.appendChild(Logo);
         const users = await getDevelopersList(url);
         renderPageUsers(users);
+        loading(false);
     };
 
     Form.oninput = e => {
@@ -45,6 +48,10 @@
     Login.appendChild(Logo);    
     Login.appendChild(FormLogin);
     FormLogin.appendChild(Form);
+    let loadingIco = create(`div`);
+    loadingIco.classList.add('loading');
+    body.appendChild(loadingIco);
+
 
     async function fakeAuthenticate(email, password) {
         const response = await fetch(`http://www.mocky.io/v2/5dba690e3000008c00028eb6`);
@@ -88,6 +95,15 @@
         }))
     }
 
+    function loading(status) {
+        if(status) {
+            loadingIco.setAttribute("style", "display:inline-block")
+        }
+        loadingIco.setAttribute("style", "display:none")
+            
+
+    }
+
     // init
     (async function(){
         const rawToken = localStorage.getItem('token');
@@ -97,11 +113,13 @@
             location.href='#login';
             app.appendChild(Login);
         } else {
+            loading(true);
             location.href='#users';
             const users = await getDevelopersList(atob(token[1]));
             app.appendChild(Users);
             Users.appendChild(Logo);
             renderPageUsers(users);
+            loading(false);
         }
     })()
 })()

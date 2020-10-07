@@ -47,6 +47,19 @@ body {
     text-align: center;
     margin-bottom: 150px;
 }
+.loading{
+    background-image:url("../images/Spinner-1s-200px.svg");
+    background-position: center;
+    background-color: #ffffff96;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
 .formLogin{
     border-radius: 20px 0px 20px 0px;
     -moz-border-radius: 20px 0px 20px 0px;
