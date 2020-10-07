@@ -17,11 +17,9 @@
     const Form = create('form');
     Form.classList.add('form');
 
-
-
     Form.onsubmit = async e => {
         e.preventDefault();
-        const [email, password] = "/* trecho omitido */"
+        const [data] = e.target.parentElement.children;
 
         const {url} = await fakeAuthenticate(email.value, password.value);
 
@@ -39,26 +37,24 @@
     };
     
     Form.innerHTML = `
-        <input type="text" class="email" placeholder="Entre com seu e-mail" >
-        <input type="password" class="password" placeholder="Digite sua senha supersecreta">
-        <button class="entrar">Entrar</button>
+    <input type="email" id="email" class="email" placeholder="Entre com seu e-mail" >
+    <input type="password" id="password" class="password" placeholder="Digite sua senha supersecreta">
+    <button class="entrar" disabled="disabled">Entrar</button>
     `
-
-    // app.appendChild(Logo);
+    
     Login.appendChild(Logo);
     Login.appendChild(FormLogin);
     FormLogin.appendChild(Form);
-    
 
     async function fakeAuthenticate(email, password) {
 
-        /**
-         * bloco de código omitido
-         * aqui esperamos que você faça a requisição ao URL informado
-         */
+
+        const response = await fetch(`http://www.mocky.io/v2/5dba690e3000008c00028eb6`);
+        const data = await response.json();
 
         const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+300000}`;
-        /* trecho omitido */
+        
+        localStorage.setItem('token', fakeJwtToken);
 
         return data;
     }
@@ -88,7 +84,7 @@
 
     // init
     (async function(){
-        const rawToken = false;
+        const rawToken = localStorage.getItem('token');
         const token = rawToken ? rawToken.split('.') : null
         if (!token || token[2] < (new Date()).getTime()) {
             localStorage.removeItem('token');

@@ -65,12 +65,18 @@ body {
 
 }
 .entrar {
-    width: 100%;
-    background-color: #d1d1d1;
+    width: 100%;    
+    background-color: #008429;
     padding:10px;
     border: none;
-    color: #fff
+    color: #fff;
 }
+
+.entrar:disabled {
+    background-color: #d1d1d1;
+  }
+
+
 .
 /**
 * YOUR CODE HERE
