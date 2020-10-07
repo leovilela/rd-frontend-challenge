@@ -74,10 +74,72 @@ body {
 
 .entrar:disabled {
     background-color: #d1d1d1;
+}
+
+ul.container{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.users{
+    flex-direction: column;
+    text-align: center;
+}
+
+.userContainer {
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px none #000000;
+    padding:5px;
+    margin:5px;
+    background-color: #ffffff;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex: 1 1 auto;
+}
+
+
+
+.avatar{
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 0px none #000000;
+    width: 35px; 
+    height: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.avatar .upAvatar {
+    position: absolute;
+    display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    top: -15px;
+    left: -15px;
   }
 
+.userContainer:hover .avatar .upAvatar {
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+  }
+  
 
-.
-/**
-* YOUR CODE HERE
-*/
+
+.divText{
+    color:#938888;
+    margin-left:5px;
+    font-weight: bold;
+}

@@ -1,14 +1,15 @@
 (() => {
-    const sessionTime = 10000; //300000
+    const sessionTime = 10000000; //300000
     const selector = selector => document.querySelector(selector);
     const create = element => document.createElement(element);
     const remove = element => element.remove();
+    const elementContent = content => document.createTextNode(content)
 
     const app = selector('#app');
 
     const Login = create('div');
     const Users = create('div');
-    Login.classList.add('login');
+    
     Users.classList.add('users');
 
     const Logo = create('img');
@@ -55,27 +56,17 @@
     FormLogin.appendChild(Form);
 
     async function fakeAuthenticate(email, password) {
-
-
         const response = await fetch(`http://www.mocky.io/v2/5dba690e3000008c00028eb6`);
         const data = await response.json();
-
         const fakeJwtToken = `${btoa(email+password)}.${btoa(data.url)}.${(new Date()).getTime()+sessionTime}`;
-        
-        localStorage.setItem('token', fakeJwtToken);
-        localStorage.setItem('userList', data.url);
-
+        localStorage.setItem('token', fakeJwtToken);       
         return data;
     }
 
     async function getDevelopersList(url) {
         const response = await fetch(url);
         const data = await response.json();
-        /**
-         * bloco de código omitido
-         * aqui esperamos que você faça a segunda requisição 
-         * para carregar a lista de desenvolvedores
-         */
+        return data;
     }
 
     function renderPageUsers(users) {
@@ -85,12 +76,27 @@
         const Ul = create('ul');
         Ul.classList.add('container')
 
-        /**
-         * bloco de código omitido
-         * exiba a lista de desenvolvedores
-         */
+        Users.appendChild(Ul);         
 
-        app.appendChild(Ul)
+        users.map((user => {
+            let node = Ul.appendChild(create(`li`));
+            node.classList.add('userContainer');
+            let image = node.appendChild(create(`div`));
+            let upImage = image.appendChild(create(`div`));
+            image.setAttribute("style", `background-image:url("${user.avatar_url}")`);
+            upImage.setAttribute("style", `background-image:url("${user.avatar_url}")`);
+            image.classList.add('avatar');
+            upImage.classList.add('upAvatar');
+            node.appendChild(image);
+            let divText = Ul.appendChild(create(`li`));
+            let textNode = elementContent(user.login)
+            divText.classList.add('divText');
+            divText.appendChild(textNode);
+            node.appendChild(divText);
+            node.onclick = e => {
+                window.location.href = user.html_url
+            };            
+        }))
     }
 
     // init
