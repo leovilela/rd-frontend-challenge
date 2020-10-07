@@ -79,6 +79,7 @@ body {
 ul.container{
     display: flex;
     flex-flow: row wrap;
+    padding: 0 50px;
 }
 
 .users{
@@ -100,9 +101,10 @@ ul.container{
     align-items: center;
     cursor: pointer;
     flex: 1 1 auto;
+    -webkit-box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 6px -1px rgba(0,0,0,0.75);
 }
-
-
 
 .avatar{
     border-radius: 200px 200px 200px 200px;
@@ -134,9 +136,7 @@ ul.container{
     width: 65px;
     height: 65px;
     display: inline-block;
-  }
-  
-
+}
 
 .divText{
     color:#938888;

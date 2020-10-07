@@ -1,38 +1,30 @@
 (() => {
-    const sessionTime = 10000000; //300000
+    const sessionTime = 300000;
     const selector = selector => document.querySelector(selector);
     const create = element => document.createElement(element);
     const remove = element => element.remove();
     const elementContent = content => document.createTextNode(content)
-
     const app = selector('#app');
-
     const Login = create('div');
-    const Users = create('div');
-    
+    Login.classList.add('login');
+    const Users = create('div');    
     Users.classList.add('users');
-
     const Logo = create('img');
     Logo.src = './assets/images/logo.svg';
     Logo.classList.add('logo');
-
-
-
     const FormLogin = create('div');
     FormLogin.classList.add('formLogin');
-
     const Form = create('form');
     Form.classList.add('form');
 
     Form.onsubmit = async e => {
         e.preventDefault();
         const [data] = e.target.parentElement.children;
-
         const {url} = await fakeAuthenticate(email.value, password.value);
-
-        location.href='#users';
-        
+        location.href='#users';        
         remove(FormLogin);
+        app.appendChild(Users);
+        Users.appendChild(Logo);
         const users = await getDevelopersList(url);
         renderPageUsers(users);
     };
@@ -50,8 +42,7 @@
     <button class="entrar" disabled="disabled">Entrar</button>
     `
     
-    Login.appendChild(Logo);
-    
+    Login.appendChild(Logo);    
     Login.appendChild(FormLogin);
     FormLogin.appendChild(Form);
 
@@ -71,11 +62,9 @@
 
     function renderPageUsers(users) {
         app.classList.add('logged');
-        Login.style.display = 'inline-block'
-
+        Login.style.display = 'inline-block';
         const Ul = create('ul');
-        Ul.classList.add('container')
-
+        Ul.classList.add('container');
         Users.appendChild(Ul);         
 
         users.map((user => {
